@@ -75,11 +75,23 @@ h2 {
     font-size: 1rem;
     font-family: "Roboto";
     font-weight: 500;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
 }
 
-#sites {
-    width: 100%;
+.site {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+}
+
+.site-text:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.site-delete-btn {
+    cursor: pointer;
 }
 
 .open-btn { background-color: #009879; }
