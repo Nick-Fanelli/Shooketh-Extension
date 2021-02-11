@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 body {
-    width: 350px;
+    min-width: 350px;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -73,7 +73,7 @@ button {
 .edit-btn { background-color: #06c0f8; }
 .delete-btn { background-color: #eb4934; }
 
-.new-btn {
+#new-btn {
     width: 75%;
     margin-bottom: 10px;
     background-color: #06c0f8;
