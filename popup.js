@@ -3,12 +3,12 @@ const SyncSaveLocation = "shooketh_tab-group-data";
 const TableBody = document.querySelector("table tbody");
 const EditModel = document.getElementById("editModel");
 const EditModelName = document.querySelector("#editModel input");
-const Span = document.getElementsByClassName("close");
+
+const CloseButton = document.getElementById("close");
 const NewGroupButton = document.getElementById("new-btn");
 
-var extensionData = {
+var extensionData = {};
 
-};
 // Extension Data Loading and Saving
 
 function saveExtensionData() {
@@ -37,10 +37,16 @@ function createGroup(name, sites) {
     saveExtensionData();
 }
 
-function editGroup() {
+var currentGroup;
+
+function editGroup(group) {
+    currentGroup = group;
+
+    let parentElement = group.parentElement.parentElement;
+    let groupName = group.parentElement.getAttribute("groupNameData");
+
     EditModel.style.display = "block";
-    EditModelName.value = "test";
-    saveExtensionData();
+    EditModelName.value = groupName;
 }
 
 function deleteGroup(group) {
@@ -60,14 +66,34 @@ function deleteGroup(group) {
     saveExtensionData();
 }
 
-Span.onclick = function() {
+function saveEditedGroupData() {
+    let previousGroupName = currentGroup.parentElement.getAttribute("groupNameData");
+    let groupName = EditModelName.value;
+
+    if(previousGroupName != groupName) {
+        if(extensionData[groupName] != undefined) {
+            window.alert(`The group name '${groupName}' already exists silly! You wouldn't want the computer to get shook!`);
+            return;
+        }
+
+        extensionData[groupName] = extensionData[previousGroupName];
+        delete extensionData[previousGroupName];
+    }
+
     EditModel.style.display = "none";
+    saveExtensionData();
+}
+
+// Edit Popup Functions
+
+CloseButton.onclick = function() {
+    saveEditedGroupData();
 }
 
 window.onclick = function(event) {
-  if (event.target == EditModel) {
-    EditModel.style.display = "none";
-  }
+    if (event.target == EditModel) {
+        saveEditedGroupData();
+    }
 }
 
 NewGroupButton.onclick = function() {
@@ -118,11 +144,16 @@ function bindButtonCallbacks() {
             });
         }
     );
+
+    // Edit Callbacks
+    document.querySelectorAll(".edit-btn").forEach(
+        item => {
+            item.addEventListener("click", event => {
+                editGroup(item);
+            });
+        }
+    );
 }
 
 // On Popup Startup Code
 loadExtensionData();
-// saveExtensionData();
-
-// saveExtensionData()
-// alert("Hello World");
