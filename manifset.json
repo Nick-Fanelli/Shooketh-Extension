@@ -1,0 +1,9 @@
+{
+	"name": "Shook-eth Extension",
+	"version": "1.0",
+	"mainfest_version": 2,
+	"background": {
+		"scripts": ["extension.js"]
+	},
+	"permissions": ["tabs"]
+}
