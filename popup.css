@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    width: 350px;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+h1, p {
+    text-align: center;
+    margin-bottom: 0;
+    font-family: "Roboto";
+}
+
+h1 {
+    margin-top: 10px;
+}
+
+p {
+    margin: 5px 0 0 0;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    font-size: 0.75rem;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+button {
+    border: none;
+    height: 2em;
+    width: 5em;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.open-btn { background-color: #009879; }
+.edit-btn { background-color: #06c0f8; }
+.delete-btn { background-color: #eb4934; }
+
+.new-btn {
+    width: 75%;
+    margin-bottom: 10px;
+    background-color: #06c0f8;
+}
+
+.open-btn:hover { background-color: #00ad8b; }
+.edit-btn:hover { background-color: #02afff; }
+.delete-btn:hover { background-color: #ff523b; }
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
