@@ -33,11 +33,19 @@ function loadExtensionData() {
 
 // Popup Functions
 
-function createGroup(name, sites) {
-    saveExtensionData();
-}
-
 var currentGroup;
+
+function openGroup(group) {
+    var tab;
+
+    chrome.tabs.create({url: "https://www.google.com", active: false});
+    chrome.tabs.query({active:false}, tabs => {
+        tab = tabs[tabs.length - 1];
+        // alert(tabs[tabs.length - 1].url);
+        alert(tab.url);
+    });
+
+}
 
 function editGroup(group) {
     currentGroup = group;
@@ -150,6 +158,15 @@ function bindButtonCallbacks() {
         item => {
             item.addEventListener("click", event => {
                 editGroup(item);
+            });
+        }
+    );
+
+    // Open Callbacks
+    document.querySelectorAll(".open-btn").forEach(
+        item => {
+            item.addEventListener("click", event => {
+                openGroup(item);
             });
         }
     );
