@@ -201,10 +201,10 @@ window.addEventListener('load', function() {
         let groupName = window.prompt("Please Enter New Shook-eth Group Name", "Prepare to be shook!");
     
         if(groupName != null && groupName != "") {
-            // if(extensionData[groupName] != undefined) {
-            //     alert(`You already have a group named '${groupName}' silly! You wouldn't want the computer to get shook!`);
-            //     return;
-            // }
+            if(extensionData[groupName] != undefined) {
+                alert(`You already have a group named '${groupName}' silly! You wouldn't want the computer to get shook!`);
+                return;
+            }
     
             console.log("ED: " + extensionData);
             extensionData[groupName] = [];
