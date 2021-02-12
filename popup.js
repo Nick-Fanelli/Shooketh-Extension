@@ -26,6 +26,10 @@ function loadExtensionData() {
         extensionData = result["shooketh_tab-group-data"];
         console.log(extensionData);
 
+        if(extensionData == undefined) {
+            extensionData = {};
+        }
+
         let htmlData = formatExtensionData();
         TableBody.innerHTML = htmlData;
         bindButtonCallbacks();
@@ -137,6 +141,7 @@ function deleteGroup(group) {
     if(confirmation) {
         // Delete from extension json data
         delete extensionData[groupName];
+        arrayRemove(extensionData,)
 
         parentElement.innerHTML = "";
     }
@@ -183,11 +188,12 @@ window.addEventListener('load', function() {
         let groupName = window.prompt("Please Enter New Shook-eth Group Name", "Prepare to be shook!");
     
         if(groupName != null && groupName != "") {
-            if(extensionData[groupName] != undefined) {
-                alert(`You already have a group named '${groupName}' silly! You wouldn't want the computer to get shook!`);
-                return;
-            }
+            // if(extensionData[groupName] != undefined) {
+            //     alert(`You already have a group named '${groupName}' silly! You wouldn't want the computer to get shook!`);
+            //     return;
+            // }
     
+            console.log("ED: " + extensionData);
             extensionData[groupName] = [];
         }
     
