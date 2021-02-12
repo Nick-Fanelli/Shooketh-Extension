@@ -36,13 +36,22 @@ function loadExtensionData() {
 var currentGroup;
 
 function openGroup(group) {
-    var tab;
+    var tabsToGroup = [];
 
     chrome.tabs.create({url: "https://www.google.com", active: false});
+    chrome.tabs.create({url: "https://www.google.com", active: false});
+
     chrome.tabs.query({active:false}, tabs => {
-        tab = tabs[tabs.length - 1];
-        // alert(tabs[tabs.length - 1].url);
-        alert(tab.url);
+        tabsToGroup.push(tabs[tabs.length - 1]);
+        tabsToGroup.push(tabs[tabs.length - 2]);
+
+        var tabIdGroups = [];
+
+        for(let i = 0; i < tabsToGroup.length; i++) {
+            tabIdGroups.push(tabsToGroup[i].id);
+        }
+
+        chrome.tabs.group({tabIds: tabIdGroups});
     });
 
 }
