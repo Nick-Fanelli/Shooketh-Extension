@@ -47,8 +47,16 @@ function openGroup(group) {
     let groupSiteData = extensionData[groupName];
 
     for(let site in groupSiteData) {
-        console.log(groupSiteData[site]);
-        chrome.tabs.create({url: groupSiteData[site], active: false});
+        // console.log(groupSiteData[site]);
+
+        let siteDataURL = groupSiteData[site];
+        siteDataURL = siteDataURL.replace("https:\/\/", "");
+        siteDataURL = siteDataURL.replaceAll("http:\/\/", "");
+        siteDataURL = "http://" + siteDataURL;
+
+        console.log(siteDataURL);
+
+        chrome.tabs.create({url: siteDataURL, active: false});
     }
 
     chrome.tabs.query({active:false}, tabs => {
