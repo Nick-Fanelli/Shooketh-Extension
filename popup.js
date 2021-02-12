@@ -43,12 +43,20 @@ var currentGroup;
 function openGroup(group) {
     var tabsToGroup = [];
 
-    chrome.tabs.create({url: "https://www.google.com", active: false});
-    chrome.tabs.create({url: "https://www.google.com", active: false});
+    let groupName = group.parentElement.getAttribute("groupNameData");
+    let groupSiteData = extensionData[groupName];
+
+    for(let site in groupSiteData) {
+        console.log(groupSiteData[site]);
+        chrome.tabs.create({url: groupSiteData[site], active: false});
+    }
 
     chrome.tabs.query({active:false}, tabs => {
-        tabsToGroup.push(tabs[tabs.length - 1]);
-        tabsToGroup.push(tabs[tabs.length - 2]);
+        for(let i = 0; i < groupSiteData.length; i++) {
+            tabsToGroup.push(tabs[tabs.length - 1 - i]);
+        }
+
+        console.log(tabsToGroup);
 
         var tabIdGroups = [];
 
@@ -64,7 +72,6 @@ function openGroup(group) {
 function editGroup(group) {
     currentGroup = group;
 
-    let parentElement = group.parentElement.parentElement;
     let groupName = group.parentElement.getAttribute("groupNameData");
     let groupSiteData = extensionData[groupName];
 
@@ -141,8 +148,6 @@ function deleteGroup(group) {
     if(confirmation) {
         // Delete from extension json data
         delete extensionData[groupName];
-        arrayRemove(extensionData,)
-
         parentElement.innerHTML = "";
     }
 
