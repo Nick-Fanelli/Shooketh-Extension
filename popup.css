@@ -95,6 +95,7 @@ h2 {
 }
 
 .open-btn { background-color: #009879; }
+#new-site-btn { background-color: #009879; }
 .edit-btn { background-color: #06c0f8; }
 .delete-btn { background-color: #eb4934; }
 
@@ -105,6 +106,7 @@ h2 {
 }
 
 .open-btn:hover { background-color: #00ad8b; }
+.new-site-btn:hover { background-color: #00ad8b; }
 .edit-btn:hover { background-color: #02afff; }
 .delete-btn:hover { background-color: #ff523b; }
 

@@ -6,11 +6,12 @@ const EditModelName = document.querySelector("#editModel input");
 
 const CloseButton = document.getElementById("close");
 const NewGroupButton = document.getElementById("new-btn");
+const Sites = document.getElementById("sites");
+const NewSiteButton = document.getElementById("new-site-btn");
 
 var extensionData = {};
 
 // Extension Data Loading and Saving
-
 function saveExtensionData() {
     // Save on Chrome Sync Data
     chrome.storage.sync.clear();
@@ -61,9 +62,35 @@ function editGroup(group) {
 
     let parentElement = group.parentElement.parentElement;
     let groupName = group.parentElement.getAttribute("groupNameData");
+    let groupSiteData = extensionData[groupName];
 
     EditModel.style.display = "block";
     EditModelName.value = groupName;
+
+    var htmlData = "";
+
+    for(let site in groupSiteData) {
+        htmlData += 
+        `<div class="site">
+            <p class="site-text">${groupSiteData[site]}</p>
+            <div class="site-delete-btn" style="font-size: 1rem;">&times;</div>
+        </div>`;
+    }
+
+    Sites.innerHTML = htmlData;
+}
+
+function addNewSiteToCurrentGroup() {
+    let siteURL = window.prompt("Input the URL to the desired Website!");
+
+    if(siteURL != undefined && siteURL != "") {
+        let groupName = currentGroup.parentElement.getAttribute("groupNameData");
+        extensionData[groupName].push(siteURL);
+
+        console.log(extensionData);
+    }
+
+    saveExtensionData();
 }
 
 function deleteGroup(group) {
@@ -103,30 +130,36 @@ function saveEditedGroupData() {
 
 // Edit Popup Functions
 
-CloseButton.onclick = function() {
-    saveEditedGroupData();
-}
-
-window.onclick = function(event) {
-    if (event.target == EditModel) {
+window.addEventListener('load', function() {
+    CloseButton.onclick = function() {
         saveEditedGroupData();
     }
-}
 
-NewGroupButton.onclick = function() {
-    let groupName = window.prompt("Please Enter New Shook-eth Group Name", "Prepare to be shook!");
-
-    if(groupName != null && groupName != "") {
-        if(extensionData[groupName] != undefined) {
-            alert(`You already have a group named '${groupName}' silly! You wouldn't want the computer to get shook!`);
-            return;
-        }
-
-        extensionData[groupName] = "";
+    NewSiteButton.onclick = function() {
+        addNewSiteToCurrentGroup();
     }
-
-    saveExtensionData();
-}
+    
+    window.onclick = function(event) {
+        if (event.target == EditModel) {
+            saveEditedGroupData();
+        }
+    }
+    
+    NewGroupButton.onclick = function() {
+        let groupName = window.prompt("Please Enter New Shook-eth Group Name", "Prepare to be shook!");
+    
+        if(groupName != null && groupName != "") {
+            if(extensionData[groupName] != undefined) {
+                alert(`You already have a group named '${groupName}' silly! You wouldn't want the computer to get shook!`);
+                return;
+            }
+    
+            extensionData[groupName] = [];
+        }
+    
+        saveExtensionData();
+    }
+});
 
 function formatExtensionData() {
     var returnData = "";
