@@ -98,9 +98,9 @@ function deleteSite(site) {
     if(confirmation) {
         let groupName = currentGroup.parentElement.getAttribute("groupNameData");
         extensionData[groupName] = arrayRemove(extensionData[groupName], extensionData[groupName][siteID]);
+        saveExtensionData();
+        editGroup(currentGroup);
     }
-
-    saveExtensionData();
 }
 
 function bindDeleteButtonCallbacks() {
@@ -124,6 +124,7 @@ function addNewSiteToCurrentGroup() {
     }
 
     saveExtensionData();
+    editGroup(currentGroup);
 }
 
 function deleteGroup(group) {
