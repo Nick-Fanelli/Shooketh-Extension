@@ -72,12 +72,45 @@ function editGroup(group) {
     for(let site in groupSiteData) {
         htmlData += 
         `<div class="site">
-            <p class="site-text">${groupSiteData[site]}</p>
+            <p class="site-text" jsId="${site}">${groupSiteData[site]}</p>
             <div class="site-delete-btn" style="font-size: 1rem;">&times;</div>
         </div>`;
     }
 
     Sites.innerHTML = htmlData;
+
+    bindDeleteButtonCallbacks();
+}
+
+function arrayRemove(arr, value) {
+    return arr.filter(function(ele) {
+        return ele != value;
+    });
+}
+
+function deleteSite(site) {
+    let pObject = site.parentElement.querySelector(".site-text");
+    let siteName = pObject.innerHTML;
+    let siteID = pObject.getAttribute("jsId");
+
+    let confirmation = window.confirm(`Are you sure you want to delete '${siteName}'. You will be shook!`);
+
+    if(confirmation) {
+        let groupName = currentGroup.parentElement.getAttribute("groupNameData");
+        extensionData[groupName] = arrayRemove(extensionData[groupName], extensionData[groupName][siteID]);
+    }
+
+    saveExtensionData();
+}
+
+function bindDeleteButtonCallbacks() {
+    document.querySelectorAll(".site-delete-btn").forEach(
+        item => {
+            item.addEventListener("click", event => {
+                deleteSite(item);            
+            });
+        }
+    );
 }
 
 function addNewSiteToCurrentGroup() {
