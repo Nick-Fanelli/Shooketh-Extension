@@ -10,4 +10,4 @@ For the people who want to be shook-eth to the core!
 5. Choose load Unpacked and locate the downloaded unzipped folder
 6. All Done!
 
-** Important Note: Save the unzipped folder somewhere safe, because if you delete it the extension goes away. (if your fancy you can store it in the extension folder hidden inside the program files of chrome!!!)**
+**Important Note: Save the unzipped folder somewhere safe, because if you delete it the extension goes away. (if your fancy you can store it in the extension folder hidden inside the program files of chrome!!!)**
